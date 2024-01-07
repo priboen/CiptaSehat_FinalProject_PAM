@@ -2,7 +2,7 @@
 **Administrasi Rumah Sakit**
 
 ##  Project Description
-Aplikasi ini dibuat untuk memudahkan pengguna dalam segala proses administrasi rumah sakit seperti pendataan pasien, dan tenaga medis, serta penjadwalan berobat pasien dimana pengguna bisa mengisi jadwal berobat. Aplikasi ini dikembangkan dengan Bahasa Pemrograman Kotlin dengan menggunakan Firebase sebagai database. Untuk fungsi yang lebih rinci dapat dilihat dalam Use Case Diagram di bawah ini.
+Aplikasi ini dibuat untuk memudahkan admin dalam segala proses administrasi rumah sakit seperti pendataan pasien, dan dokter, serta riwayat berobat pasien dimana admin bisa mengisi jadwal berobat. Aplikasi ini dikembangkan dengan Bahasa Pemrograman Kotlin dengan menggunakan Firebase sebagai autentifikasi login dan room database untuk menyimpan data. Untuk fungsi yang lebih rinci dapat dilihat dalam Use Case Diagram di bawah ini.
 
 
 ##  Use Case Diagram
