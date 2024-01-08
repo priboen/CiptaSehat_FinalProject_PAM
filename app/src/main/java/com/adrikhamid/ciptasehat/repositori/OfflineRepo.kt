@@ -6,8 +6,6 @@ import com.adrikhamid.ciptasehat.data.entity.Dokter
 import com.adrikhamid.ciptasehat.data.entity.Pasien
 import kotlinx.coroutines.flow.Flow
 
-class OfflineRepo {
-}
 
 class OffRepoDokter(private val dokterDao: DokterDao):DokterRepo{
     override fun getAllDokterStream(): Flow<List<Dokter>> {
