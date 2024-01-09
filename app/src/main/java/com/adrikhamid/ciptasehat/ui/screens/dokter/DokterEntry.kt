@@ -21,12 +21,13 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -37,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.data.objek.JenisKelamin.jk
-import com.adrikhamid.ciptasehat.data.objek.SpesialisDokter.spesialis
 import com.adrikhamid.ciptasehat.navigasi.CiptaSehatTopBar
 import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 import com.adrikhamid.ciptasehat.ui.viewmodel.PenyediaViewModel
@@ -100,13 +100,26 @@ fun DokterEntryBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
+/*        DokterEntryForm(
+            onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
+            onValueSpecialist = { uiStateDokter.detailDokter.spesialis },
+            pilihanJenisKelamin = jk.map { id -> context.resources.getString(id) },
+            detailDokter = uiStateDokter.detailDokter,
+            onValueChange = onDokterValueChange
+        )*/
         DokterEntryForm(
             onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
-            onSpecialistChanged = { uiStateDokter.detailDokter.spesialis },
             pilihanJenisKelamin = jk.map { id -> context.resources.getString(id) },
             detailDokter = uiStateDokter.detailDokter,
             onValueChange = onDokterValueChange
         )
+//        DokterEntryForm(
+//            onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
+//            onSpecialistChanged = { uiStateDokter.detailDokter.spesialis },
+//            pilihanJenisKelamin = jk.map { id -> context.resources.getString(id) },
+//            detailDokter = uiStateDokter.detailDokter,
+//            onValueChange = onDokterValueChange
+//        )
         Button(
             onClick = onSaveClick,
             enabled = uiStateDokter.isEntryValid,
@@ -123,13 +136,27 @@ fun DokterEntryBody(
 fun DokterEntryForm(
     modifier: Modifier = Modifier,
     onSelectionChanged: (String) -> Unit,
-    onSpecialistChanged: (DetailDokter) -> Unit,
     pilihanJenisKelamin: List<String>,
     detailDokter: DetailDokter,
     onValueChange: (DetailDokter) -> Unit = {},
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
-
+    val options = listOf(
+        "Dokter Umum",
+        "Dokter Gigi",
+        "Dokter Mata",
+        "Dokter Kulit dan Kelamin",
+        "Dokter Telinga, Hidung dan Tenggorokan",
+        "Dokter Saraf",
+        "Dokter Bedah",
+        "Dokter Anak"
+    )
+    var chosenDropdown by remember {
+        mutableStateOf(
+            detailDokter.spesialis
+        )
+    }
+    var dropDownExposed by remember { mutableStateOf(false) }
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -179,62 +206,48 @@ fun DokterEntryForm(
                 }
             }
         }
-        Text(text = "Masukan Spesialis Dokter :")
-        DropdownSpesialis(onValueSpecialist = { onSpecialistChanged(detailDokter.copy(spesialis = it)) })
-        if (enabled) {
-            Text(
-                text = "Required Field",
-                modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
-            )
-        }
-
-    }
-
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DropdownSpesialis(
-    onValueSpecialist: (String) -> Unit,
-    modifier: Modifier = Modifier,
-
-    ) {
-    val listDokter = spesialis
-    val selectedItem = remember {
-        mutableStateOf(listDokter[0])
-    }
-    val expanded = remember {
-        mutableStateOf(false)
-    }
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(32.dp)
-    ) {
-        ExposedDropdownMenuBox(
-            expanded = expanded.value,
-            onExpandedChange = {
-                expanded.value = !expanded.value
-            }
+        Text(text = "Masukan bidang dokter :")
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(32.dp)
         ) {
-            TextField(
-                value = selectedItem.value,
-                onValueChange = { onValueSpecialist(selectedItem.value) },
-                readOnly = true,
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded.value)
-                }, modifier = Modifier.menuAnchor()
-            )
-            ExposedDropdownMenu(
-                expanded = expanded.value,
-                onDismissRequest = { expanded.value = false }) {
-                listDokter.forEach {
-                    DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                        selectedItem.value = it
-                        onValueSpecialist(it)
-                        expanded.value = false
-                    })
+            ExposedDropdownMenuBox(
+                expanded = dropDownExposed,
+                onExpandedChange = {
+                    dropDownExposed = !dropDownExposed
+                }
+            ) {
+                OutlinedTextField(
+                    value = chosenDropdown,
+                    readOnly = true,
+                    onValueChange = { },
+                    label = { Text("Spesialis Dokter") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = dropDownExposed
+                        )
+                    },
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth(1f)
+                )
+                ExposedDropdownMenu(
+                    expanded = dropDownExposed,
+                    onDismissRequest = {
+                        dropDownExposed = false
+                    }
+                ) {
+                    options.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            text = { Text(text = selectionOption) },
+                            onClick = {
+                                chosenDropdown = selectionOption
+                                onValueChange(detailDokter.copy(spesialis = selectionOption))
+                                dropDownExposed = false
+                            }
+                        )
+                    }
                 }
             }
         }
