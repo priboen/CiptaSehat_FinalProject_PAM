@@ -1,5 +1,6 @@
 package com.adrikhamid.ciptasehat.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -26,6 +29,9 @@ import com.adrikhamid.ciptasehat.R
 fun DashBoard(
     modifier: Modifier = Modifier,
 ) {
+    val img_dokter = painterResource(id = R.drawable.dokter)
+    val img_pasien = painterResource(id = R.drawable.pasien)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,6 +66,10 @@ fun DashBoard(
                             shape = RoundedCornerShape(20.dp)
                         ), contentAlignment = Alignment.Center
                 ) {
+                    Image(
+                        painter = img_dokter,
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds)
 
                 }
                 Box(
@@ -103,6 +113,10 @@ fun DashBoard(
                             shape = RoundedCornerShape(20.dp)
                         ), contentAlignment = Alignment.Center
                 ) {
+                    Image(
+                        painter = img_pasien,
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds)
 
                 }
                 Box(
