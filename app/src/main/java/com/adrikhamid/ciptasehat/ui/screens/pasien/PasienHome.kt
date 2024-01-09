@@ -37,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.data.entity.Pasien
 import com.adrikhamid.ciptasehat.ui.viewmodel.PenyediaViewModel
+import com.adrikhamid.ciptasehat.ui.viewmodel.pasien.PasienHomeViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
