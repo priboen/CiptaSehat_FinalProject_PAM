@@ -11,4 +11,6 @@
     <string name="mata">Dokter Spesialis Mata</string>
     <string name="tht">Dokter Spesialis THT</string>
     <string name="bedah">Dokter Spesialis Bedah</string>
+    <string name="data_dokter">Dokter</string>
+    <string name="data_pasien">Pasien</string>
 </resources>
