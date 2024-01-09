@@ -1,5 +1,6 @@
 package com.adrikhamid.ciptasehat.data.dao
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -7,7 +8,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.adrikhamid.ciptasehat.data.entity.Pasien
 import kotlinx.coroutines.flow.Flow
-
+@Dao
 interface PasienDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(pasien: Pasien)
