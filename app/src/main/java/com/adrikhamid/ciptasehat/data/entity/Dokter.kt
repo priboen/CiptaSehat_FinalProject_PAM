@@ -10,6 +10,7 @@ data class Dokter(
     @ColumnInfo(name = "dokter_id")
     val id: Int = 0,
     val namaDokter: String = "",
+    val nohp: String = "",
     val jkDokter: String = "",
-    val Spesialis: String = ""
+    val spesialis: String = ""
 )
