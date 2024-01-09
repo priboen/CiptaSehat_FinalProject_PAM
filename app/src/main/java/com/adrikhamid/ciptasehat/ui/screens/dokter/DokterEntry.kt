@@ -181,6 +181,12 @@ fun DokterEntryForm(
         }
         Text(text = "Masukan Spesialis Dokter :")
         DropdownSpesialis(onValueSpecialist = { onSpecialistChanged(detailDokter.copy(spesialis = it)) })
+        if (enabled) {
+            Text(
+                text = "Required Field",
+                modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
+            )
+        }
 
     }
 
@@ -223,10 +229,10 @@ fun DropdownSpesialis(
             ExposedDropdownMenu(
                 expanded = expanded.value,
                 onDismissRequest = { expanded.value = false }) {
-                listDokter.forEach { item ->
-                    DropdownMenuItem(text = { item }, onClick = {
-                        selectedItem.value = item
-                        onValueSpecialist(item)
+                listDokter.forEach {
+                    DropdownMenuItem(text = { Text(text = it) }, onClick = {
+                        selectedItem.value = it
+                        onValueSpecialist(it)
                         expanded.value = false
                     })
                 }
