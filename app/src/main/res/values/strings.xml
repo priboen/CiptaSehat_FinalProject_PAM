@@ -19,4 +19,6 @@
     <string name="nohp">No Telepon</string>
     <string name="jk">Jenis Kelamin</string>
     <string name="spesialis">Spesialis</string>
+    <string name="tgl">Tanggal Lahir</string>
+    <string name="alamat">Alamat</string>
 </resources>
