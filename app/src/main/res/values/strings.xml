@@ -13,4 +13,10 @@
     <string name="bedah">Dokter Spesialis Bedah</string>
     <string name="data_dokter">Dokter</string>
     <string name="data_pasien">Pasien</string>
+    <string name="back_button">Back</string>
+    <string name="btn_submit">Submit</string>
+    <string name="nama">Nama</string>
+    <string name="nohp">No Telepon</string>
+    <string name="jk">Jenis Kelamin</string>
+    <string name="spesialis">Spesialis</string>
 </resources>
