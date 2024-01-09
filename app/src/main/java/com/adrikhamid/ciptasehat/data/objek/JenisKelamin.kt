@@ -1,8 +1,10 @@
 package com.adrikhamid.ciptasehat.data.objek
 
+import com.adrikhamid.ciptasehat.R
+
 object JenisKelamin {
     val jk = listOf(
-        "Laki-laki",
-        "Perempuan",
+        R.string.l,
+        R.string.p
     )
 }

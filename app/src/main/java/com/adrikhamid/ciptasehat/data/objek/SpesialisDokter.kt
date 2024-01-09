@@ -1,5 +1,7 @@
 package com.adrikhamid.ciptasehat.data.objek
 
+import com.adrikhamid.ciptasehat.R
+
 object SpesialisDokter {
     val spesialis = listOf(
         "Dokter Umum",
