@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Cipta Sehat</string>
     <string name="back">Kembali</string>
+    <string name="l">Laki-Laki</string>
+    <string name="p">Perempuan</string>
+    <string name="umum">Dokter Umum</string>
+    <string name="gigi">Dokter Spesialis Gigi</string>
+    <string name="saraf">Dokter Spesialis Saraf</string>
+    <string name="anak">Dokter Spesialis Anak</string>
+    <string name="kulit">Dokter Spesialis Kulit dan Kelamin</string>
+    <string name="mata">Dokter Spesialis Mata</string>
+    <string name="tht">Dokter Spesialis THT</string>
+    <string name="bedah">Dokter Spesialis Bedah</string>
 </resources>
