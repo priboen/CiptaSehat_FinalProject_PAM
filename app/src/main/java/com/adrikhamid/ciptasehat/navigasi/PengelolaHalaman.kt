@@ -1,6 +1,5 @@
 package com.adrikhamid.ciptasehat.navigasi
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -12,9 +11,19 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.adrikhamid.ciptasehat.R
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterEntryScreen
+import com.adrikhamid.ciptasehat.ui.screens.dokter.HalamanEntry
+
+
+@Composable
+fun CiptaApp(navController: NavHostController = rememberNavController()) {
+    HostNavigas(navController = navController)
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,4 +50,17 @@ fun CiptaSehatTopBar(
             }
         }
     )
+}
+
+@Composable
+fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(
+        navController = navController,
+        startDestination = HalamanEntry.route,
+        modifier = modifier
+    ) {
+        composable(HalamanEntry.route) {
+            DokterEntryScreen(navigateBack = { navController.popBackStack() })
+        }
+    }
 }
