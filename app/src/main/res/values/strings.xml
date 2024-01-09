@@ -21,4 +21,8 @@
     <string name="spesialis">Spesialis</string>
     <string name="tgl">Tanggal Lahir</string>
     <string name="alamat">Alamat</string>
+    <string name="deskripsi_no_item">Tidak ada data Dokter!</string>
+    <string name="entry_dokter">Tambah Dokter</string>
+    <string name="entry_pasien">Tambah Pasien</string>
+
 </resources>
