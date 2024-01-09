@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,11 +24,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -42,11 +39,18 @@ import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.data.objek.JenisKelamin.jk
 import com.adrikhamid.ciptasehat.data.objek.SpesialisDokter.spesialis
 import com.adrikhamid.ciptasehat.navigasi.CiptaSehatTopBar
+import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 import com.adrikhamid.ciptasehat.ui.viewmodel.PenyediaViewModel
 import com.adrikhamid.ciptasehat.ui.viewmodel.dokter.DetailDokter
 import com.adrikhamid.ciptasehat.ui.viewmodel.dokter.DokterEntryViewModel
 import com.adrikhamid.ciptasehat.ui.viewmodel.dokter.UIStateDokter
 import kotlinx.coroutines.launch
+
+
+object HalamanEntry : DestinasiNavigasi {
+    override val route = "dokter_entry"
+    override val judul = R.string.data_dokter
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
