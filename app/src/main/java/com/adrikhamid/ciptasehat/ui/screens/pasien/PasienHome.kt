@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.data.entity.Pasien
+import com.adrikhamid.ciptasehat.navigasi.CiptaSehatTopBar
 import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 import com.adrikhamid.ciptasehat.ui.viewmodel.PenyediaViewModel
 import com.adrikhamid.ciptasehat.ui.viewmodel.pasien.PasienHomeViewModel
@@ -47,10 +48,12 @@ object PasienHomeDestinasi : DestinasiNavigasi {
     override val route = "pasien_home"
     override val judul = R.string.data_pasien
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasienHomeScreen(
     navigateToItemEntry: () -> Unit,
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (Int) -> Unit = {},
     viewModel: PasienHomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
@@ -61,6 +64,11 @@ fun PasienHomeScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            CiptaSehatTopBar(
+                judul = stringResource(id = PasienHomeDestinasi.judul),
+                bisaNavigasiKembali = true,
+                navigateUp = onNavigateBack
+            )
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -85,6 +93,7 @@ fun PasienHomeScreen(
         )
     }
 }
+
 @Composable
 fun BodyPasien(
     itemPasien: List<Pasien>,
@@ -111,6 +120,7 @@ fun BodyPasien(
         }
     }
 }
+
 @Composable
 fun ListPasien(
     itemPasien: List<Pasien>,
@@ -128,6 +138,7 @@ fun ListPasien(
         }
     }
 }
+
 @Composable
 fun DataPasien(
     pasien: Pasien,

@@ -118,7 +118,8 @@ fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier)
         composable(PasienHomeDestinasi.route) {
             PasienHomeScreen(
                 navigateToItemEntry = { navController.navigate(PasienEntryDestinasi.route) },
-                onDetailClick = { itemId -> navController.navigate("${PasienDetailDestinasi.route}/$itemId") }
+                onDetailClick = { itemId -> navController.navigate("${PasienDetailDestinasi.route}/$itemId") },
+                onNavigateBack = { navController.popBackStack() }
             )
         }
         composable(PasienEntryDestinasi.route) {
