@@ -79,7 +79,7 @@ fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier)
         composable(DestinasiHome.route) {
             DashBoard(
                 onDokterClick = { navController.navigate(DokterHomeDestinasi.route) },
-                onPasienClick = { navController.navigate(PasienEntryDestinasi.route) })
+                onPasienClick = { navController.navigate(PasienHomeDestinasi.route) })
         }
         composable(DokterHomeDestinasi.route) {
             DokterHomeScreen(
