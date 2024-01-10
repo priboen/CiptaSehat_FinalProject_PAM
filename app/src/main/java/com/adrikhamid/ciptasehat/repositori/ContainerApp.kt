@@ -6,6 +6,7 @@ import com.adrikhamid.ciptasehat.data.DatabaseCS
 interface ContainerApp {
     val dokterRepo: DokterRepo
     val pasienRepo: PasienRepo
+    val berobatRepo: BerobatRepo
 }
 
 class ContainerDataApp(private val context: Context) : ContainerApp {
@@ -15,5 +16,9 @@ class ContainerDataApp(private val context: Context) : ContainerApp {
 
     override val pasienRepo: PasienRepo by lazy {
         OffRepoPasien(DatabaseCS.getDatabase(context).pasienDao())
+    }
+
+    override val berobatRepo: BerobatRepo by lazy {
+        OffRepoBerobat(DatabaseCS.getDatabase(context).berobatDao())
     }
 }
