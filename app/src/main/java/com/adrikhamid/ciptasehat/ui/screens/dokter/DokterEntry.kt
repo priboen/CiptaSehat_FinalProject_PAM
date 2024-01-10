@@ -1,5 +1,6 @@
 package com.adrikhamid.ciptasehat.ui.screens.dokter
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -68,7 +70,8 @@ fun DokterEntryScreen(
             CiptaSehatTopBar(
                 judul = "Tambah Dokter",
                 bisaNavigasiKembali = true,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                navigateUp = navigateBack
             )
         }
     ) { innerPadding ->
@@ -99,7 +102,7 @@ fun DokterEntryBody(
     val context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
-        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)).background(color = Color(android.graphics.Color.parseColor("#ffffff")))
     ) {
         DokterEntryForm(
             onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
@@ -198,7 +201,7 @@ fun DokterEntryForm(
                 expanded = dropDownExposed,
                 onExpandedChange = {
                     dropDownExposed = !dropDownExposed
-                }
+                },
             ) {
                 OutlinedTextField(
                     value = chosenDropdown,
