@@ -23,6 +23,6 @@ interface BerobatDao {
     @Query("SELECT * from tbl_berobat WHERE id = :id")
     fun getBerobat(id: Int): Flow<Berobat>
 
-    @Query("SELECT * from tbl_dokter ORDER BY namaDokter ASC")
+    @Query("SELECT * from tbl_berobat ORDER BY pasienNama ASC")
     fun getAllBerobat(): Flow<List<Berobat>>
 }
