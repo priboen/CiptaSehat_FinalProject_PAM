@@ -42,12 +42,14 @@ fun DashBoard(
 ) {
     val img_dokter = painterResource(id = R.drawable.dokter)
     val img_pasien = painterResource(id = R.drawable.pasien)
+    val img_obat = painterResource(id = R.drawable.berobat)
+
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxSize()
-            .background(color = Color(android.graphics.Color.parseColor("#ede7f8")))
+            .background(color = Color(android.graphics.Color.parseColor("#f5f5f5")))
             .padding(
                 dimensionResource(id = R.dimen.padding_medium)
             ), horizontalAlignment = Alignment.CenterHorizontally
@@ -66,14 +68,14 @@ fun DashBoard(
                         top = dimensionResource(
                             id = R.dimen.padding_medium
                         )
-                    ), horizontalAlignment = Alignment.CenterHorizontally
+                    ) , horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
                     modifier = Modifier
                         .height(65.dp)
                         .width(75.dp)
                         .background(
-                            color = Color(android.graphics.Color.parseColor("#7868e5")),
+                            color = Color(android.graphics.Color.parseColor("#4a4848")),
                             shape = RoundedCornerShape(20.dp)
                         ), contentAlignment = Alignment.Center
                 ) {
@@ -92,7 +94,7 @@ fun DashBoard(
                         .padding(top = dimensionResource(id = R.dimen.padding_medium))
                         .height(40.dp)
                         .background(
-                            color = Color(android.graphics.Color.parseColor("#dad8ff")),
+                            color = Color(android.graphics.Color.parseColor("#2accf5")),
                             shape = RoundedCornerShape(bottomEnd = 20.dp, bottomStart = 20.dp)
                         ),
                 ) {
@@ -100,7 +102,7 @@ fun DashBoard(
                         text = stringResource(id = R.string.data_dokter),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(android.graphics.Color.parseColor("#7868e5"))
+                        color = Color(android.graphics.Color.parseColor("#f5f5f5"))
                     )
                 }
 
@@ -145,7 +147,7 @@ fun DashBoard(
                         .height(40.dp)
                         .background(
                             color = Color(
-                                android.graphics.Color.parseColor("#dad8ff")
+                                android.graphics.Color.parseColor("#2accf5")
                             ),
                             shape = RoundedCornerShape(bottomEnd = 20.dp, bottomStart = 20.dp)
                         ),
@@ -154,9 +156,67 @@ fun DashBoard(
                         text = stringResource(id = R.string.data_pasien),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(android.graphics.Color.parseColor("#7868e5"))
+                        color = Color(android.graphics.Color.parseColor("#f5f5f5"))
                     )
                 }
+
+
+            }
+
+
+            Column(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .padding(end = 12.dp)
+                    .background(color = Color.White, shape = RoundedCornerShape(20.dp))
+                    .padding(
+                        top = dimensionResource(
+                            id = R.dimen.padding_medium
+                        )
+                    ), horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Box(
+                    modifier = Modifier
+                        .height(65.dp)
+                        .width(75.dp)
+                        .background(
+                            color = Color(android.graphics.Color.parseColor("#7868e5")),
+                            shape = RoundedCornerShape(20.dp)
+                        ), contentAlignment = Alignment.Center
+                ) {
+                    Card(onClick = onPasienClick) {
+                        Image(
+                            painter = img_obat,
+                            contentDescription = null,
+                            contentScale = ContentScale.FillBounds
+                        )
+                    }
+                }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = dimensionResource(
+                                id = R.dimen.padding_medium
+                            )
+                        )
+                        .height(40.dp)
+                        .background(
+                            color = Color(
+                                android.graphics.Color.parseColor("#2accf5")
+                            ),
+                            shape = RoundedCornerShape(bottomEnd = 20.dp, bottomStart = 20.dp)
+                        ),
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.data_obat),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(android.graphics.Color.parseColor("#f5f5f5"))
+                    )
+                }
+
 
             }
 
