@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -47,7 +48,7 @@ import com.adrikhamid.ciptasehat.ui.viewmodel.dokter.UIStateDokter
 import kotlinx.coroutines.launch
 
 
-object HalamanEntry : DestinasiNavigasi {
+object DokterEntryDestinasi : DestinasiNavigasi {
     override val route = "dokter_entry"
     override val judul = R.string.data_dokter
 }
@@ -92,42 +93,22 @@ fun DokterEntryScreen(
 fun DokterEntryBody(
     uiStateDokter: UIStateDokter,
     onDokterValueChange: (DetailDokter) -> Unit,
+    modifier: Modifier = Modifier,
     onSaveClick: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
-/*        DokterEntryForm(
-            onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
-            onValueSpecialist = { uiStateDokter.detailDokter.spesialis },
-            pilihanJenisKelamin = jk.map { id -> context.resources.getString(id) },
-            detailDokter = uiStateDokter.detailDokter,
-            onValueChange = onDokterValueChange
-        )*/
         DokterEntryForm(
             onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
             pilihanJenisKelamin = jk.map { id -> context.resources.getString(id) },
             detailDokter = uiStateDokter.detailDokter,
+            onSaveClick = onSaveClick,
+            uiStateDokter = uiStateDokter,
             onValueChange = onDokterValueChange
         )
-//        DokterEntryForm(
-//            onSelectionChanged = { uiStateDokter.detailDokter.jkDokter },
-//            onSpecialistChanged = { uiStateDokter.detailDokter.spesialis },
-//            pilihanJenisKelamin = jk.map { id -> context.resources.getString(id) },
-//            detailDokter = uiStateDokter.detailDokter,
-//            onValueChange = onDokterValueChange
-//        )
-        Button(
-            onClick = onSaveClick,
-            enabled = uiStateDokter.isEntryValid,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = stringResource(id = R.string.btn_submit))
-        }
     }
 }
 
@@ -139,6 +120,8 @@ fun DokterEntryForm(
     pilihanJenisKelamin: List<String>,
     detailDokter: DetailDokter,
     onValueChange: (DetailDokter) -> Unit = {},
+    onSaveClick: () -> Unit,
+    uiStateDokter: UIStateDokter,
     enabled: Boolean = true,
 ) {
     val options = listOf(
@@ -192,8 +175,7 @@ fun DokterEntryForm(
                             onValueChange(detailDokter.copy(jkDokter = item))
                             onSelectionChanged(item)
                         }
-                    )
-
+                    ), verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
                         selected = detailDokter.jkDokter == item,
@@ -250,6 +232,14 @@ fun DokterEntryForm(
                     }
                 }
             }
+        }
+        Button(
+            onClick = onSaveClick,
+            enabled = uiStateDokter.isEntryValid,
+            shape = MaterialTheme.shapes.small,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = stringResource(id = R.string.btn_submit))
         }
     }
 }

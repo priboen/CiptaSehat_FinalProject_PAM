@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adrikhamid.ciptasehat.repositori.DokterRepo
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterEditDestinasi
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class DokterEditViewModel(
     var dokterUiState by mutableStateOf(UIStateDokter())
         private set
 
-    private val itemId: Int = 0
+    private val itemId: Int = checkNotNull(savedStateHandle[DokterEditDestinasi.dokterIdArg])
 
     init {
         viewModelScope.launch {

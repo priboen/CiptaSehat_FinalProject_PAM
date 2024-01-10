@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,10 +26,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.adrikhamid.ciptasehat.R
+import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 
+object DestinasiHome : DestinasiNavigasi {
+    override val route = "home"
+    override val judul = R.string.app_name
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashBoard(
     modifier: Modifier = Modifier,
+    onDokterClick: () -> Unit,
+    onPasienClick: () -> Unit
 ) {
     val img_dokter = painterResource(id = R.drawable.dokter)
     val img_pasien = painterResource(id = R.drawable.pasien)
@@ -66,11 +77,13 @@ fun DashBoard(
                             shape = RoundedCornerShape(20.dp)
                         ), contentAlignment = Alignment.Center
                 ) {
-                    Image(
-                        painter = img_dokter,
-                        contentDescription = null,
-                        contentScale = ContentScale.FillBounds)
-
+                    Card(onClick = onDokterClick) {
+                        Image(
+                            painter = img_dokter,
+                            contentDescription = null,
+                            contentScale = ContentScale.FillBounds,
+                        )
+                    }
                 }
                 Box(
                     contentAlignment = Alignment.Center,
@@ -89,7 +102,6 @@ fun DashBoard(
                         fontWeight = FontWeight.Bold,
                         color = Color(android.graphics.Color.parseColor("#7868e5"))
                     )
-
                 }
 
             }
@@ -113,11 +125,13 @@ fun DashBoard(
                             shape = RoundedCornerShape(20.dp)
                         ), contentAlignment = Alignment.Center
                 ) {
-                    Image(
-                        painter = img_pasien,
-                        contentDescription = null,
-                        contentScale = ContentScale.FillBounds)
-
+                    Card(onClick = onPasienClick) {
+                        Image(
+                            painter = img_pasien,
+                            contentDescription = null,
+                            contentScale = ContentScale.FillBounds
+                        )
+                    }
                 }
                 Box(
                     contentAlignment = Alignment.Center,
@@ -148,8 +162,5 @@ fun DashBoard(
 
         }
         Text(text = "Jadwal")
-
-
-
     }
 }

@@ -36,10 +36,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.data.entity.Pasien
+import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 import com.adrikhamid.ciptasehat.ui.viewmodel.PenyediaViewModel
 import com.adrikhamid.ciptasehat.ui.viewmodel.pasien.PasienHomeViewModel
 
 
+object PasienHomeDestinasi : DestinasiNavigasi {
+    override val route = "pasien_home"
+    override val judul = R.string.data_pasien
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasienHomeScreen(

@@ -35,14 +35,21 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.data.entity.Dokter
+import com.adrikhamid.ciptasehat.navigasi.CiptaSehatTopBar
+import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 import com.adrikhamid.ciptasehat.ui.viewmodel.PenyediaViewModel
 import com.adrikhamid.ciptasehat.ui.viewmodel.dokter.DokterHomeViewModel
 
+object DokterHomeDestinasi : DestinasiNavigasi {
+    override val route = "dokter_home"
+    override val judul = R.string.data_dokter
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DokterHomeScreen(
     navigateToItemEntry: () -> Unit,
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (Int) -> Unit = {},
     viewModel: DokterHomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
@@ -53,6 +60,11 @@ fun DokterHomeScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            CiptaSehatTopBar(
+                judul = stringResource(DokterEntryDestinasi.judul),
+                bisaNavigasiKembali = true,
+                navigateUp = onNavigateBack
+            )
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -77,6 +89,7 @@ fun DokterHomeScreen(
         )
     }
 }
+
 @Composable
 fun BodyDokter(
     itemDokter: List<Dokter>,
@@ -103,6 +116,7 @@ fun BodyDokter(
         }
     }
 }
+
 @Composable
 fun ListDokter(
     itemDokter: List<Dokter>,
@@ -113,13 +127,14 @@ fun ListDokter(
         items(items = itemDokter, key = { it.id }) { person ->
             DataDokter(
                 dokter = person,
-                modifier = Modifier
+                modifier = modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clickable { onItemClick(person) }
             )
         }
     }
 }
+
 @Composable
 fun DataDokter(
     dokter: Dokter,
@@ -130,11 +145,11 @@ fun DataDokter(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
+            modifier = modifier.padding(dimensionResource(id = R.dimen.padding_large)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = modifier.fillMaxWidth()
             ) {
                 Text(
                     text = dokter.namaDokter,

@@ -12,12 +12,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.adrikhamid.ciptasehat.R
+import com.adrikhamid.ciptasehat.ui.screens.DashBoard
+import com.adrikhamid.ciptasehat.ui.screens.DestinasiHome
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterDetailDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterDetailsScreen
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterEditDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterEntryDestinasi
 import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterEntryScreen
-import com.adrikhamid.ciptasehat.ui.screens.dokter.HalamanEntry
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterHomeDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterHomeScreen
+import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterItemEditScreen
+import com.adrikhamid.ciptasehat.ui.screens.pasien.PasienEntryDestinasi
 
 
 @Composable
@@ -56,11 +67,45 @@ fun CiptaSehatTopBar(
 fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = HalamanEntry.route,
+        startDestination = DestinasiHome.route,
         modifier = modifier
     ) {
-        composable(HalamanEntry.route) {
+        composable(DestinasiHome.route) {
+            DashBoard(
+                onDokterClick = { navController.navigate(DokterHomeDestinasi.route) },
+                onPasienClick = { navController.navigate(PasienEntryDestinasi.route) })
+        }
+        composable(DokterHomeDestinasi.route) {
+            DokterHomeScreen(
+                navigateToItemEntry = { navController.navigate(DokterEntryDestinasi.route) },
+                onDetailClick = { itemId -> navController.navigate("${DokterDetailDestinasi.route}/$itemId") },
+                onNavigateBack = { navController.popBackStack() })
+        }
+        composable(DokterEntryDestinasi.route) {
             DokterEntryScreen(navigateBack = { navController.popBackStack() })
+        }
+        composable(
+            DokterDetailDestinasi.routeWithArgs,
+            arguments = listOf(navArgument(DokterDetailDestinasi.dokterIdArg) {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getInt(DokterDetailDestinasi.dokterIdArg)
+            itemId?.let {
+                DokterDetailsScreen(
+                    navigateToEditItem = { navController.navigate("${DokterEditDestinasi.route}/$it") },
+                    navigateBack = { navController.popBackStack() })
+            }
+        }
+        composable(
+            DokterEditDestinasi.routeWithArgs,
+            arguments = listOf(navArgument(DokterEditDestinasi.dokterIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            DokterItemEditScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() })
         }
     }
 }

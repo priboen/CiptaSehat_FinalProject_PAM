@@ -23,6 +23,15 @@
     <string name="alamat">Alamat</string>
     <string name="deskripsi_no_item">Tidak ada data Dokter!</string>
     <string name="entry_dokter">Tambah Dokter</string>
+    <string name="detail_dokter">Detail Dokter</string>
+    <string name="edit_dokter">Edit Dokter</string>
     <string name="entry_pasien">Tambah Pasien</string>
-
+    <string name="detail_pasien">Detail Pasien</string>
+    <string name="edit_pasien">Edit Pasien</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="delete">Hapus</string>
+    <string name="update">Edit</string>
+    <string name="attention">Perhatian</string>
+    <string name="tanya">Apakah anda yakin menghapus ini?</string>
 </resources>
