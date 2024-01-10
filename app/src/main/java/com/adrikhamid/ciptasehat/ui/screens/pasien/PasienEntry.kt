@@ -41,7 +41,7 @@ object PasienEntryDestinasi : DestinasiNavigasi {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EntrySiswaScreen(
+fun EntryPasienScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PasienEntryViewModel = viewModel(factory = PenyediaViewModel.Factory)
