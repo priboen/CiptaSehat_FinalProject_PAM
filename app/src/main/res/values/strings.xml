@@ -17,12 +17,13 @@
     <string name="back_button">Back</string>
     <string name="btn_submit">Submit</string>
     <string name="nama">Nama</string>
+    <string name="nama_dokter">Nama Dokter</string>
     <string name="nohp">No Telepon</string>
     <string name="jk">Jenis Kelamin</string>
     <string name="spesialis">Spesialis</string>
     <string name="tgl">Tanggal Lahir</string>
     <string name="alamat">Alamat</string>
-    <string name="deskripsi_no_item">Tidak ada data Dokter!</string>
+    <string name="deskripsi_no_item">Tidak ada data!</string>
     <string name="entry_dokter">Tambah Dokter</string>
     <string name="detail_dokter">Detail Dokter</string>
     <string name="edit_dokter">Edit Dokter</string>
@@ -35,4 +36,5 @@
     <string name="update">Edit</string>
     <string name="attention">Perhatian</string>
     <string name="tanya">Apakah anda yakin menghapus ini?</string>
+    <string name="jenis_perawatan">Jenis Perawatan</string>
 </resources>
