@@ -55,7 +55,7 @@ object BerobatHomeDestinasi: DestinasiNavigasi{
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasienHomeScreen(
+fun BerobatHomeScreen(
     navigateToItemEntry: () -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,

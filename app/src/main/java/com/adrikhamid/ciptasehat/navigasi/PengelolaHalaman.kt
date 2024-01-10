@@ -20,6 +20,14 @@ import androidx.navigation.navArgument
 import com.adrikhamid.ciptasehat.R
 import com.adrikhamid.ciptasehat.ui.screens.DashBoard
 import com.adrikhamid.ciptasehat.ui.screens.DestinasiHome
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatDetailDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatDetailsScreen
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatEditDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatEntryDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatHomeDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatHomeScreen
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatItemEditScreen
+import com.adrikhamid.ciptasehat.ui.screens.berobat.EntryBerobatScreen
 import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterDetailDestinasi
 import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterDetailsScreen
 import com.adrikhamid.ciptasehat.ui.screens.dokter.DokterEditDestinasi
@@ -114,6 +122,41 @@ fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier)
                 onNavigateUp = { navController.navigateUp() })
         }
 
+        //Berobat
+        composable(BerobatHomeDestinasi.route) {
+            BerobatHomeScreen(
+                navigateToItemEntry = { navController.navigate(BerobatEntryDestinasi.route) },
+                onDetailClick = { itemId -> navController.navigate("${BerobatDetailDestinasi.route}/$itemId") },
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+        composable(BerobatEntryDestinasi.route) {
+            EntryBerobatScreen(navigateBack = { navController.popBackStack() })
+        }
+        composable(
+            BerobatDetailDestinasi.routeWithArgs,
+            arguments = listOf(navArgument(BerobatDetailDestinasi.berobatIdArg) {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getInt(BerobatDetailDestinasi.berobatIdArg)
+            itemId?.let {
+                BerobatDetailsScreen(
+                    navigateToEditItem = { navController.navigate("${BerobatEditDestinasi.route}/$it") },
+                    navigateBack = { navController.popBackStack() })
+            }
+        }
+        composable(
+            BerobatEditDestinasi.routeWithArgs,
+            arguments = listOf(navArgument(BerobatDetailDestinasi.berobatIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            BerobatItemEditScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() })
+        }
+
         //Pasien
         composable(PasienHomeDestinasi.route) {
             PasienHomeScreen(
@@ -148,7 +191,5 @@ fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier)
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
-
-        //Berobat
     }
 }
