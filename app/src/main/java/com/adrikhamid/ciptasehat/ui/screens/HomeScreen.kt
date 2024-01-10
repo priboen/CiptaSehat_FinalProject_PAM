@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.adrikhamid.ciptasehat.R
+import com.adrikhamid.ciptasehat.navigasi.CiptaSehatTopBar
 import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 
 object DestinasiHome : DestinasiNavigasi {
@@ -35,10 +37,37 @@ object DestinasiHome : DestinasiNavigasi {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+fun AppHomeScreen(
+    navigasiDokter: () -> Unit,
+    navigasiPasien: () -> Unit,
+    navigasiBerobat: () -> Unit,
+) {
+    Scaffold(
+        topBar = {
+            CiptaSehatTopBar(
+                judul = stringResource(id = DestinasiHome.judul),
+                bisaNavigasiKembali = false
+            )
+        }
+    ) { innerPadding ->
+        DashBoard(
+            onDokterClick = { navigasiDokter },
+            onPasienClick = { navigasiPasien },
+            onBerobatClicl = { navigasiBerobat },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun DashBoard(
     modifier: Modifier = Modifier,
     onDokterClick: () -> Unit,
-    onPasienClick: () -> Unit
+    onPasienClick: () -> Unit,
+    onBerobatClicl: () -> Unit
 ) {
     val img_dokter = painterResource(id = R.drawable.dokter)
     val img_pasien = painterResource(id = R.drawable.pasien)
@@ -51,8 +80,9 @@ fun DashBoard(
             .fillMaxSize()
             .background(color = Color(android.graphics.Color.parseColor("#f5f5f5")))
             .padding(
-                dimensionResource(id = R.dimen.padding_medium)
-            ), horizontalAlignment = Alignment.CenterHorizontally
+                dimensionResource(id = R.dimen.padding_extra_large)
+            )
+            .padding(top = dimensionResource(id = R.dimen.padding_extra_large)), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
@@ -68,7 +98,7 @@ fun DashBoard(
                         top = dimensionResource(
                             id = R.dimen.padding_medium
                         )
-                    ) , horizontalAlignment = Alignment.CenterHorizontally
+                    ), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
                     modifier = Modifier
@@ -184,7 +214,7 @@ fun DashBoard(
                             shape = RoundedCornerShape(20.dp)
                         ), contentAlignment = Alignment.Center
                 ) {
-                    Card(onClick = onPasienClick) {
+                    Card(onClick = onBerobatClicl) {
                         Image(
                             painter = img_obat,
                             contentDescription = null,
@@ -221,6 +251,5 @@ fun DashBoard(
             }
 
         }
-        Text(text = "Jadwal")
     }
 }

@@ -7,6 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adrikhamid.ciptasehat.repositori.BerobatRepo
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatDetailDestinasi
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatEditDestinasi
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -19,7 +21,7 @@ class BerobatEditViewModel(
     var BerobatUiState by mutableStateOf(UIStateBerobat())
         private set
 
-    private val itemId: Int = checkNotNull(savedStateHandle[BerobatEditDestinasi.BerobatIdArg])
+    private val itemId: Int = checkNotNull(savedStateHandle[BerobatDetailDestinasi.berobatIdArg])
 
     init {
         viewModelScope.launch {

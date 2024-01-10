@@ -71,7 +71,7 @@ fun PasienDetailsScreen(
     Scaffold(
         topBar = {
             CiptaSehatTopBar(
-                judul = stringResource(DokterDetailDestinasi.judul),
+                judul = stringResource(PasienDetailDestinasi.judul),
                 bisaNavigasiKembali = true,
                 navigateUp = navigateBack
             )

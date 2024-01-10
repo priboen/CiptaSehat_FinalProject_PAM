@@ -133,7 +133,6 @@ fun FormInputPasien(
         OutlinedTextField(
             value = detailPasien.tglLahir,
             onValueChange = { onValueChange(detailPasien.copy(tglLahir = it)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             label = { Text(stringResource(R.string.tgl)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,

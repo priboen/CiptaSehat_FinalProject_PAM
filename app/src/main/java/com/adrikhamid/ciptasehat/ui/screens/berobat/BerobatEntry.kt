@@ -3,9 +3,11 @@ package com.adrikhamid.ciptasehat.ui.screens.berobat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -13,19 +15,23 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adrikhamid.ciptasehat.R
+import com.adrikhamid.ciptasehat.data.objek.JenisPerawatan.rawat
 import com.adrikhamid.ciptasehat.navigasi.CiptaSehatTopBar
 import com.adrikhamid.ciptasehat.navigasi.DestinasiNavigasi
 import com.adrikhamid.ciptasehat.ui.screens.pasien.FormInputPasien
@@ -80,6 +86,7 @@ fun EntryBerobatScreen(
         )
     }
 }
+
 @Composable
 fun BerobatEntryBody(
     uiStateBerobat: UIStateBerobat,
@@ -87,6 +94,7 @@ fun BerobatEntryBody(
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
         modifier = modifier
@@ -96,7 +104,9 @@ fun BerobatEntryBody(
         FormInputBerobat(
             detailBerobat = uiStateBerobat.detailBerobat,
             onValueChange = onBerobatValueChange,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            onSelectionChanged = { uiStateBerobat.detailBerobat.jenisPerawatan },
+            pilihanJenisRawat = rawat.map {id -> context.resources.getString(id)}
         )
         Button(
             onClick = onSaveClick,
@@ -108,12 +118,15 @@ fun BerobatEntryBody(
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInputBerobat(
     detailBerobat: DetailBerobat,
     modifier: Modifier = Modifier,
     onValueChange: (DetailBerobat) -> Unit = {},
+    pilihanJenisRawat: List<String>,
+    onSelectionChanged: (String) -> Unit,
     enabled: Boolean = true
 ) {
     Column(
@@ -122,7 +135,7 @@ fun FormInputBerobat(
     ) {
         OutlinedTextField(
             value = detailBerobat.pasienNama,
-            onValueChange = {  onValueChange(detailBerobat.copy(pasienNama = it))},
+            onValueChange = { onValueChange(detailBerobat.copy(pasienNama = it)) },
             label = { Text(stringResource(R.string.nama)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
@@ -131,19 +144,36 @@ fun FormInputBerobat(
         OutlinedTextField(
             value = detailBerobat.dokterNama,
             onValueChange = { onValueChange(detailBerobat.copy(dokterNama = it)) },
-            label = {Text(stringResource(R.string.nama_dokter))  },
+            label = { Text(stringResource(R.string.nama_dokter)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
-        OutlinedTextField(
-            value = detailBerobat.jenisPerawatan,
-            onValueChange = {onValueChange(detailBerobat.copy(jenisPerawatan = it))  },
-            label = {Text(stringResource(R.string.jenis_perawatan)) },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
-        )
+        Column(
+            modifier = modifier.fillMaxWidth()
+        ) {
+            Text(text = stringResource(id = R.string.jenis_perawatan))
+            pilihanJenisRawat.forEach { item ->
+                Row(
+                    modifier = modifier.selectable(
+                        selected = detailBerobat.jenisPerawatan == item,
+                        onClick = {
+                            onValueChange(detailBerobat.copy(jenisPerawatan = item))
+                            onSelectionChanged(item)
+                        }
+                    ), verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        selected = detailBerobat.jenisPerawatan == item,
+                        onClick = {
+                            onValueChange(detailBerobat.copy(jenisPerawatan = item))
+                            onSelectionChanged(item)
+                        }
+                    )
+                    Text(text = item)
+                }
+            }
+        }
         Divider(
             thickness = dimensionResource(id = R.dimen.padding_small),
             modifier = Modifier.padding(

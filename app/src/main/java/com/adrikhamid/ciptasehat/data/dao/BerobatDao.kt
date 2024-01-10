@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.adrikhamid.ciptasehat.data.entity.Berobat
-import com.adrikhamid.ciptasehat.data.entity.Dokter
 import kotlinx.coroutines.flow.Flow
 @Dao
 interface BerobatDao {

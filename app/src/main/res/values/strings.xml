@@ -37,4 +37,8 @@
     <string name="attention">Perhatian</string>
     <string name="tanya">Apakah anda yakin menghapus ini?</string>
     <string name="jenis_perawatan">Jenis Perawatan</string>
+    <string name="igd">Inap Gawat Darurat</string>
+    <string name="ugd">Unit Gawat Darurat</string>
+    <string name="konsul">Konsultasi</string>
+    <string name="checkup">Medical Check Up</string>
 </resources>

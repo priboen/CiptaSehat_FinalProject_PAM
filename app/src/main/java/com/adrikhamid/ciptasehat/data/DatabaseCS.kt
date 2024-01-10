@@ -12,7 +12,7 @@ import com.adrikhamid.ciptasehat.data.entity.Dokter
 import com.adrikhamid.ciptasehat.data.entity.Pasien
 import kotlinx.coroutines.InternalCoroutinesApi
 
-@Database(entities = [Dokter::class, Pasien::class, Berobat::class], version = 1, exportSchema = false)
+@Database(entities = [Dokter::class, Pasien::class, Berobat::class], version = 3, exportSchema = false)
 abstract class DatabaseCS : RoomDatabase() {
     abstract fun dokterDao(): DokterDao
     abstract fun pasienDao(): PasienDao

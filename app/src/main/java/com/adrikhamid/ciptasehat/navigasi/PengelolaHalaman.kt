@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.adrikhamid.ciptasehat.R
+import com.adrikhamid.ciptasehat.ui.screens.AppHomeScreen
 import com.adrikhamid.ciptasehat.ui.screens.DashBoard
 import com.adrikhamid.ciptasehat.ui.screens.DestinasiHome
 import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatDetailDestinasi
@@ -43,6 +44,7 @@ import com.adrikhamid.ciptasehat.ui.screens.pasien.PasienEditDestinasi
 import com.adrikhamid.ciptasehat.ui.screens.pasien.PasienEntryDestinasi
 import com.adrikhamid.ciptasehat.ui.screens.pasien.PasienHomeDestinasi
 import com.adrikhamid.ciptasehat.ui.screens.pasien.PasienHomeScreen
+import com.adrikhamid.ciptasehat.ui.screens.pasien.PasienItemEditScreen
 
 
 @Composable
@@ -85,9 +87,10 @@ fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier)
         modifier = modifier
     ) {
         composable(DestinasiHome.route) {
-            DashBoard(
-                onDokterClick = { navController.navigate(DokterHomeDestinasi.route) },
-                onPasienClick = { navController.navigate(PasienHomeDestinasi.route) })
+            AppHomeScreen(
+                navigasiDokter = { navController.navigate(DokterHomeDestinasi.route) },
+                navigasiPasien = { navController.navigate(PasienHomeDestinasi.route) },
+                navigasiBerobat = {navController.navigate(BerobatHomeDestinasi.route)},)
         }
         composable(DokterHomeDestinasi.route) {
             DokterHomeScreen(
@@ -187,7 +190,7 @@ fun HostNavigas(navController: NavHostController, modifier: Modifier = Modifier)
                 type = NavType.IntType
             })
         ) {
-            DokterItemEditScreen(
+            PasienItemEditScreen(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }

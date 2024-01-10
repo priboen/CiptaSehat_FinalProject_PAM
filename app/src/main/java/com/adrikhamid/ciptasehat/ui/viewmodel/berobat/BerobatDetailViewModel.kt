@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adrikhamid.ciptasehat.repositori.BerobatRepo
+import com.adrikhamid.ciptasehat.ui.screens.berobat.BerobatDetailDestinasi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -15,7 +16,7 @@ class BerobatDetailViewModel(
     private val berobatRepo: BerobatRepo
 ) : ViewModel() {
 
-    private val BerobatId: Int = checkNotNull(savedStateHandle[BerobatDetailDestinasi.BerobatIdArg])
+    private val BerobatId: Int = checkNotNull(savedStateHandle[BerobatDetailDestinasi.berobatIdArg])
     val uiState: StateFlow<BerobatDetailUiState> =
         berobatRepo.getBerobatStream(BerobatId).filterNotNull()
             .map { BerobatDetailUiState(detailBerobat = it.toDetailBerobat()) }.stateIn(

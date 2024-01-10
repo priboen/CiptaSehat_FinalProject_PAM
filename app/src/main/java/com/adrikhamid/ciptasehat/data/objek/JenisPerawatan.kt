@@ -1,10 +1,12 @@
 package com.adrikhamid.ciptasehat.data.objek
 
+import com.adrikhamid.ciptasehat.R
+
 object JenisPerawatan {
     val rawat = listOf(
-        "Inap Gawat Darurat",
-        "Unit Gawat Darurat",
-        "Konsultasi",
-        "Medical Check Up",
+        R.string.igd,
+        R.string.ugd,
+        R.string.konsul,
+        R.string.checkup,
     )
 }
