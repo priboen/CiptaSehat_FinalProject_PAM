@@ -51,9 +51,9 @@ fun AppHomeScreen(
         }
     ) { innerPadding ->
         DashBoard(
-            onDokterClick = { navigasiDokter },
-            onPasienClick = { navigasiPasien },
-            onBerobatClicl = { navigasiBerobat },
+            onDokterClick = navigasiDokter ,
+            onPasienClick = navigasiPasien,
+            onBerobatClicl = navigasiBerobat,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
